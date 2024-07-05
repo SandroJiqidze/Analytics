@@ -1,8 +1,8 @@
-config-version: 2
+config-version: 2   # Specifies the dbt configuration file format version (2 in this case).
 
-name: "jaffle_shop"
-version: "3.0.0"
-require-dbt-version: ">=1.5.0"
+name: "jaffle_shop"   # The name of your dbt project ("jaffle_shop").
+version: "3.0.0"      # The version of your dbt project ("3.0.0").
+require-dbt-version: ">=1.5.0"    #   The minimum required dbt version to run this project (">=1.5.0").
 
 dbt-cloud:
   project-id: 275557 # Put your project id here
@@ -11,16 +11,16 @@ profile: default # Put your profile here
 
 
 
-model-paths: ["models"]
-analysis-paths: ["analyses"]
-test-paths: ["data-tests"]
-seed-paths: ["seeds"]
-macro-paths: ["macros"]
-snapshot-paths: ["snapshots"]
+model-paths: ["models"]       # Specifies the directory containing your dbt models ("models").
+analysis-paths: ["analyses"]  # Specifies the directory containing your dbt analyses (if applicable, not defined here).
+test-paths: ["data-tests"]    # Specifies the directory containing your dbt data tests ("data-tests").
+seed-paths: ["seeds"]         # Specifies the directory containing your dbt seeds ("seeds").
+macro-paths: ["macros"]       # Specifies the directory containing your dbt macros ("macros").
+snapshot-paths: ["snapshots"] # Specifies the directory containing your dbt snapshots (if applicable, not defined here).
 
 
-target-path: "target"
-clean-targets:
+target-path: "target"         # Specifies the output directory for compiled dbt artifacts ("target").
+clean-targets:                # A list of directories to clean up during the dbt clean command ("target" and "dbt_packages" in this case).
   - "target"
   - "dbt_packages"
 
@@ -28,12 +28,12 @@ vars:
   "dbt_date:time_zone": "Europe/Madrid" # Example EU time zone
 
 seeds:
-  jaffle_shop:
+  jaffle_shop:                # A section for defining seed data for your models. Here, you have a seed named "jaffle_shop" targeting the "raw" schema.
     +schema: raw
 
-models:
+models:                       # A section for defining your dbt models. Here, you have a model named "jaffle_shop" with two materialized views:
   jaffle_shop:
-    staging:
+    staging:                  #  Materialized as a view.
       +materialized: view
-    marts:
+    marts:                    # Materialized as a table.
       +materialized: table
